@@ -2,6 +2,24 @@
 import pandas as pd
 
 
+def clean_track_name(name: str) -> str:
+    if pd.isna(name):
+        return name
+
+    name = str(name)
+
+    # Remove text in brackets
+    for sep in [" (", " ["]:
+        if sep in name:
+            name = name.split(sep, 1)[0]
+
+    # Remove dash-based suffixes ONLY if space-dash-space or space-dash
+    if " - " in name:
+        name = name.split(" - ", 1)[0]
+
+    return name.strip()
+
+
 def load_data(file_path: str,
               string_cols: list | None = None,
               date_cols: list | None = None,
@@ -55,6 +73,33 @@ def load_data(file_path: str,
     for col in object_cols - exclude_cols:
         if col in df.columns:
             df[col] = df[col].astype("category")
+
+    # Clean track names if the column exists
+    if 'name' in df.columns:
+        df['name'] = df['name'].apply(clean_track_name)
+        df["name"] = (
+            df["name"]
+            .str.lower()
+            .str.strip()
+        )
+
+    if 'artist_name' in df.columns:
+        df['artist_name'] = df['artist_name'].str.lower().str.strip()
+
+    df["artist_primary"] = (
+        df["artists"].astype(str)
+        .str.split(";", n=1)
+        .str[0]
+        .str.lower()
+        .str.strip()
+    )
+
+    df = (
+        df.sort_values("popularity", ascending=False).drop_duplicates(
+                subset=["name", "artist_primary"],
+                keep="first"
+            )
+        )
 
     # Remove duplicates and rows with missing values
     df.drop_duplicates(inplace=True)
