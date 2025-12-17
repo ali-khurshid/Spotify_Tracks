@@ -2,8 +2,6 @@
 Utility functions for graphing and visualization.
 """
 
-import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
 import pandas as pd
 
@@ -13,12 +11,13 @@ MARGINS = dict(l=40,
                b=40)
 
 
-def plot_scatter_with_regression(df: pd.DataFrame,
-                                 x_col: str,
-                                 y_col: str,
-                                 title: str = "",
-                                 xlabel: str = "",
-                                 ylabel: str = "") -> None:
+def plot_scatter(df: pd.DataFrame,
+                 x_col: str,
+                 y_col: str,
+                 title: str = "",
+                 xlabel: str = "",
+                 ylabel: str = "",
+                 trend: bool = False) -> None:
     """
     Plots a scatter plot with a trendline using Plotly Express.
     Args:
@@ -29,15 +28,24 @@ def plot_scatter_with_regression(df: pd.DataFrame,
         xlabel (str): Label for the x-axis.
         ylabel (str): Label for the y-axis.
     """
-    fig = px.scatter(
-        df,
-        x=x_col,
-        y=y_col,
-        labels={x_col: xlabel, y_col: ylabel},
-        trendline="ols",
-        trendline_color_override="red",
-        title=title
-    )
+    if trend:
+        fig = px.scatter(
+            df,
+            x=x_col,
+            y=y_col,
+            labels={x_col: xlabel, y_col: ylabel},
+            title=title,
+            trendline="ols",
+            trendline_color_override="red"
+        )
+    else:
+        fig = px.scatter(
+            df,
+            x=x_col,
+            y=y_col,
+            labels={x_col: xlabel, y_col: ylabel},
+            title=title
+        )
     fig.update_layout(margin=MARGINS)
     return fig
 
