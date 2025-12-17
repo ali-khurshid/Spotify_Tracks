@@ -1,72 +1,52 @@
 import streamlit as st
-import pandas as pd
-import joblib
-from streamlit_option_menu import option_menu
-
-#---------------------Main entry page------------------------------------#
 
 st.set_page_config(
-    page_title = "Spotify Track Recommendation Engine",
-    page_icon = "🎵",
-    layout = "wide",
-    initial_sidebar_state="expanded",
+    page_title="Spotify Track Recommendation Engine",
+    page_icon="🎵",
+    layout="wide",
 )
-# #---------------Hide default sidebar---------------------#
-# st.markdown(
-#     """
-#     <style>
-#     [data-testid="stSidebarNav"] {
-#         display: none;
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
-
-#Display banner at top
-
-col1, col2, col3 = st.columns([1, 3, 1])
-
-with col2:
-    st.image("Images/banner_image.jpg", width = 1300)
-
-st.markdown("""
-         
-        Spotify Track Recommendation Engine.
-         Navigate using the sidebar to explore diffeent sections of this dashboard.
-         - **Developed by:** AudioBuddy Inc.
-            - **Creators**: Ali Khurshid, Robert, Collins, Thomas
-         """)
 
 
-#-----------Define pages for navigation--------------------------#
+# ---------- Define pages ----------
+home = st.Page(
+    "pages/01_home.py",
+    title="Home",
+)
 
-homepage = st.page("pages/01_home.py",
-                   title = "Home",
-                   icon = ":material/home:")
-EDA = st.page("pages/02_EDA.py",
-                   title = "Exploratory Data Analysis",
-                   icon = ":material/bar chart:")
-Hypotheses = st.page("pages/03_Hypotheses.py",
-                   title = "Hypotheses",
-                   icon = ":material/experiment:")
-Clustering = st.page("pages/04_Clustering.py",
-                   title = "Clustering",
-                   icon = ":material/hive:")
+eda = st.Page(
+    "pages/02_eda.py",
+    title="Exploratory Data Analysis",
+)
 
+hypothesis1 = st.Page(
+    "pages/03_hypothesis1.py",
+    title="Hypothesis 1",
+)
 
-#setup navigation
+hypothesis2 = st.Page(
+    "pages/04_hypothesis2.py",
+    title="Hypothesis 2",
+)
 
-nav = st.navigation({
-"home":"Overview",
-"EDA" : "Exploratory Data Analysis"
- "Hypotheses": [
-        hypothesis1,
-        hypothesis2,
-        hypothesis3,
-        hypothesis4,
-    ],
-"Analysis":[
-    clustering
-    ],
-})
+hypothesis3 = st.Page(
+    "pages/05_hypothesis3.py",
+    title="Hypothesis 3",
+)
+
+clustering = st.Page(
+    "pages/06_clustering.py",
+    title="Clustering",
+)
+
+# ---------- Navigation ----------
+nav = st.navigation(
+    {
+        "Main": [home],
+        "EDA": [eda],
+        "Analysis": [hypothesis1, hypothesis2, hypothesis3],
+        "Clusters": [clustering],
+    }
+)
+
+# ---------- REQUIRED ----------
+nav.run()
