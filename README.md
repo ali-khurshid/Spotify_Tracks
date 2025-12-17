@@ -79,7 +79,19 @@ The dataset columns can be split into two categories metadata and audio features
 
 ## Hypothesis Testing and Validation
 
-## Hypothesis 1
+Hypothesis 1: Tracks with higher danceability and energy have significantly higher popularity scores than tracks with lower values.
+
+-   Correlation analysis to see if there is a correlation between dancability and popularity
+
+Hypothesis 2: Explicit tracks are, on average, more popular than non-explicit tracks.
+
+-   Correlation analysis between explicit tracks (those that contain explicit language) and popularity to see if there is a correation between the explicit nature of the song and popularity.
+
+Hypothesis 3: Tracks with high acousticness have lower energy and lower popularity.
+
+-   Calculate the correlation between acousticness and energy and acousticness and popularity
+
+Hypothesis 4:
 
 ## The rationale to map the business requirements to the data visualisations
 
