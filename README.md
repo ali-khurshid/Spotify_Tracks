@@ -91,7 +91,10 @@ Hypothesis 3: Tracks with high acousticness have lower energy and lower populari
 
 -   Calculate the correlation between acousticness and energy and acousticness and popularity
 
-Hypothesis 4:
+Hypothesis 4: Tracks cluster into distinct musical profiles that differ significantly in popularity.
+
+-   Perform an unsupervised clustering task on the audio features to group track into distinct groups.
+-   Use a statistical test (depending on normality) to see if the popularity of the different clusters differs significantly.
 
 ## The rationale to map the business requirements to the data visualisations
 
