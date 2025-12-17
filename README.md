@@ -39,44 +39,47 @@
 
 ## Dataset Content
 
-The [Spotify Track Records](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) downloaded from kaggle contains patient records including demographic information, health indicators, and lifestyle factors. Key features include:
+The [Spotify Track Records](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset/data) downloaded from kaggle contains dataset of Spotify songs with different genres and their audio features.
+The dataset columns can be split into two categories metadata and audio features:
 
--   **Numerical:**
+-   **Metadata:**
 
-    -   `age`
-    -   `avg_glucose_level`
-    -   `bmi`
+    -   `track_id` - The Spotify ID for the track
+    -   `artists` - the name(s) of the performer(s)
+    -   `album_name` The album name in which the track appears
+    -   `track_name` - the name of the track
+    -   `popularity` - a rating from 0 to 100 which indicates trak popularity
+    -   `duration_ms` - song length in milliseconds
+    -   `explicit` - boolean representing whether the track has explicit lyrics
+    -   `genre` - song category from spotify (e.g. pop)
 
--   **Categorical:**
+-   **Audio Features:**
 
-    -   `gender`
-    -   `hypertension`
-    -   `heart_disease`
-    -   `ever_married`
-    -   `work_type`
-    -   `residence_type`
-    -   `smoking_status`
-
--   **Target:**
-
-    -   `stroke` (0 = no stroke, 1 = stroke)
+    -   `danceability` - Danceability describes how suitable a track is for dancing
+    -   `energy` - Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity
+    -   `key` - The key the track is in
+    -   `loudness` - The overall loudness of a track in decibels (dB)
+    -   `mode` - major or minor
+    -   `speechiness` - Speechiness detects the presence of spoken words in a track.
+    -   `acousticness` - A measure from 0.0 to 1.0 of whether the track is acoustic
+    -   `instrumentalness` - Predicts whether a track contains no vocals.
+    -   `liveness` - Detects the presence of an audience in the recording
+    -   `valence` - A measure from 0.0 to 1.0 describing the musical positiveness
+    -   `tempo` - The overall estimated tempo of a track in beats per minute (BPM)
+    -   `time_signature` - An estimated time signature
 
 ---
 
 ## Business Requirements
 
--   Identify the features most associated with stroke risk.
--   Provide clear visualizations to support ML model creation
--   Ensure the analysis is reproducible and interpretable.
--   Understand imbalanced data impact
--   Check if prediction works for educational purposes or real life application
--   Ensure AI & ML ethical attributes are considered.
+-   Predict the popularity of a song based on its audio features. Which features in songs (e.g. dancability or energy) lead to songs being more popular. Can we predict what songs will get lots of streams and make lots of money
+-   Set up the infrastructure to make a recommendation engine. Can similar songs be categorised based on their audio features and so could we use this to recommend songs to users based on their listening history.
 
 ---
 
 ## Hypothesis Testing and Validation
 
----
+## Hypothesis 1
 
 ## The rationale to map the business requirements to the data visualisations
 
