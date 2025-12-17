@@ -1,72 +1,186 @@
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-## Template Instructions
 
-Welcome,
+## Project Bookmarks:
 
-This is the Code Institute student template for the Data Analytics capstone project. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
+-   [README](https://github.com/ali-khurshid/stroke-risk-predictive-analysis/blob/main/README.md)
+-   [Project board](https://github.com/users/ali-khurshid/projects/7)
+-   [Raw Data](https://github.com/ali-khurshid/stroke-risk-predictive-analysis/blob/main/Data/raw-dataset-stroke-data.csv) | [Clean data](https://github.com/ali-khurshid/stroke-risk-predictive-analysis/blob/main/Data/cleaned_data.csv)
+-   [ETL Jupyter Notebook - EDA](https://github.com/ali-khurshid/stroke-risk-predictive-analysis/blob/main/jupyter_notebooks/01%20-%20stroke_eda.ipynb)
+-   [ETL Jupyter Notebook - Hypothesis Testing](https://github.com/ali-khurshid/stroke-risk-predictive-analysis/blob/main/jupyter_notebooks/02%20-%20hypothesis_testing.ipynb)
+-   [ETL Jupyter Notebook - Feature Engineering](https://github.com/ali-khurshid/stroke-risk-predictive-analysis/blob/main/jupyter_notebooks/03%20-%20feature_engineering_backup.ipynb)
+-   [ETL Jupyter Notebook - ML Modeling](https://github.com/ali-khurshid/stroke-risk-predictive-analysis/blob/main/jupyter_notebooks/04%20-%20modeling.ipynb)
+-   [Streamlit](https://risk-prediction-for-stroke.streamlit.app/)
+-   [Conclusion and Discussion](#conclusion-and-discussion)
 
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
+## Table of Contents:
 
-## How to use this repo
+-   [Project Overview](#project-overview)
+-   [Dataset Content](#dataset-content)
+-   [Business Requirements](#business-requirements)
+-   [Hypothesis Testing and Validation](#hypothesis-testing-and-validation)
+-   [Rationale to map business requirements](#the-rationale-to-map-the-business-requirements-to-the-data-visualisations)
+-   [Analysis Techniques Used](#analysis-techniques-used)
+-   [Project Plan](#project-plan)
+-   [Project Board](#project-board)
+-   [Ethical Consideration](#ethical-considerations)
+-   [Streamlit App](#streamlit-app)
+-   [Unfixed Bugs and Challenges Faced](#unfixed-bugs-and-challenges-faced)
+-   [Development Roadmap](#development-roadmap)
+-   [Main data Analysis Libraries](#main-data-analysis-libraries)
+-   [Findings](#findings)
+-   [Conclusion and Discussion](#conclusion-and-discussion)
+-   [Credits](#credits)
+-   [Acknowledgements](#acknowledgements)
 
-1. Use this template to create your GitHub project repo. Click the **Use this template** button, then click **Create a new repository**.
 
-1. Copy the URL of your repository to your clipboard.
+## Project Overview
 
-1. In VS Code, select **File** -> **Open Folder**.
 
-1. Select your `vscode-projects` folder, then click the **Select Folder** button on Windows, or the **Open** button on Mac.
+---
 
-1. From the top menu in VS Code, select **Terminal** > **New Terminal** to open the terminal.
+## Dataset Content
+The [Spotify Track Records](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) downloaded from kaggle contains patient records including demographic information, health indicators, and lifestyle factors. Key features include:
 
-1. In the terminal, type `git clone` followed by the URL of your GitHub repository. Then hit **Enter**. This command will download all the files in your GitHub repository into your vscode-projects folder.
+- **Numerical:** 
 
-1. In VS Code, select **File** > **Open Folder** again.
+    - `age` 
+    - `avg_glucose_level`
+    - `bmi`
+- **Categorical:** 
 
-1. This time, navigate to and select the folder for the project you just downloaded. Then, click **Select Folder**.
+  - `gender` 
+  - `hypertension`
+  - `heart_disease` 
+  - `ever_married` 
+  - `work_type`
+  - `residence_type` 
+  - `smoking_status`
+- **Target:** 
 
-1. A virtual environment is necessary when working with Python projects to ensure each project's dependencies are kept separate from each other. You need to create your virtual environment, also called a venv, and then ensure that it is activated any time you return to your workspace.
-Click the gear icon in the lower left-hand corner of the screen to open the Manage menu and select **Command Palette** to open the VS Code command palette.
+  - `stroke` (0 = no stroke, 1 = stroke)
 
-1. In the command palette, type: *create environment* and select **Python: Create Environment…**
+---
 
-1. Choose **Venv** from the dropdown list.
+## Business Requirements
+- Identify the features most associated with stroke risk.
+- Provide clear visualizations to support ML model creation
+- Ensure the analysis is reproducible and interpretable.
+- Understand imbalanced data impact
+- Check if prediction works for educational purposes or real life application
+- Ensure AI & ML ethical attributes are considered.
 
-1. Choose the Python version you installed earlier. Currently, we recommend Python 3.12.8
+---
 
-1. **DO NOT** click the box next to `requirements.txt`, as you need to do more steps before you can install your dependencies. Click **OK**.
+## Hypothesis Testing and Validation
 
-1. You will see a `.venv` folder appear in the file explorer pane to show that the virtual environment has been created.
 
-1. **Important**: Note that the `.venv` folder is in the `.gitignore` file so that Git won't track it.
+------
 
-1. Return to the terminal by clicking on the TERMINAL tab, or click on the **Terminal** menu and choose **New Terminal** if no terminal is currently open.
+## The rationale to map the business requirements to the data visualisations
 
-1. In the terminal, use the command below to install your dependencies. This may take several minutes.
 
- ```console
- pip3 install -r requirements.txt
- ```
 
-1. Open the `jupyter_notebooks` directory, and click on the notebook you want to open.
+## Project Plan
 
-1. Click the **kernel** button and choose **Python Environments**.
+| Day             |      Plan                                     |                   Responsibility                        |
+| :-------------- | :-------------:                               | :------------------------------------------------:      |
+| Monday          |  Load data, clean and EDA                            | Perform EDA and understand relationships. Clean the data|
+| Tuesday         |  Hypothesis creation and Feature Engineering             |  Based on audio feature distribution charts, create a set of hypothesis and run it past feature engineering tasks.         |
+| Wednesday       |  Cluster and Model creation       |  Cluster creation, visualisation and data preparation for the model  |
+| Thursday        |  Hyperparameter Tuning and Dashboard         |     Using best performance parameters for clustering   |
+| Friday          |  Presentation                         |            Presentation  |
 
-Note that the kernel says `Python 3.12.8` as it inherits from the venv, so it will be Python-3.12.8 if that is what is installed on your PC. To confirm this, you can use the command below in a notebook code cell.
+## Project Board
 
-```console
-! python --version
-```
+A snapshot of the project board midway through my capstone project.
 
-## Deployment Reminders
 
-* Set the `.python-version` Python version to a [Heroku-22](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version that closest matches what you used in this project.
-* The project can be deployed to Heroku using the following steps.
 
-1. Log in to Heroku and create an App
-2. At the **Deploy** tab, select **GitHub** as the deployment method.
-3. Select your repository name and click **Search**. Once it is found, click **Connect**.
-4. Select the branch you want to deploy, then click **Deploy Branch**.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
-6. If the slug size is too large, then add large files not required for the app to the `.slugignore` file.
+---
+
+
+## Ethical Considerations
+- Data anonymization: No personally identifiable information is used.
+
+
+---
+
+## Streamlit App
+I created a Streamlit app to allow 
+
+The app is a multi-paged dashboard consisting of:
+
+
+
+
+## Unfixed Bugs
+
+
+
+---
+
+## Development Roadmap
+
+<u>**Challenges Faced**</u>
+
+
+
+<u>**What Next**</u>
+
+
+
+---
+
+
+## Main Data Analysis Libraries
+The following libraries were used in my project.
+
+
+ - `helpers`
+ - `joblib`
+- `matplotlib` . `pyplot`
+- `numpy`
+- `os`
+- `Pandas`
+ - `pyexpat`
+- `scipy` . `stats`
+- `seaborn`
+- `sklearn` . `pipeline`
+- `sklearn` . `compose`
+- `sklearn` . `preprocessing`
+- `sklearn` . `impute`
+- `sklearn` . `linear_model`
+- `sklearn` . `metrics`
+- `imblearn` . `oversampling`
+- `sklearn` . `model_selection`
+- `sklearn` . `ensemble`
+- `streamlit`
+ 
+
+---
+
+## Findings
+
+
+
+## Conclusion and Discussion
+
+
+## Credits 
+
+### Content 
+
+- ChatGPT helped me rephrase my englih and sentence construction in this document.
+- ChatGPT was used to help create code and debug errors. It alsohelped unblock deployment of my Streamlit app to the cloud, which took several hours to complete.
+- Dataset downloaded from [Kaggle](https://www.kaggle.com/datasets).
+
+### Media
+
+- Streamlit banner image taken from [Freepik](https://www.freepik.com/)
+
+## Acknowledgements
+
+* Special thanks to our facilitator Emma Lamont, Our Tutors Neil, Michael and Spencer for making this course easy to learn.
+* I'd like to thank all my colleagues for being a fun group to work with.
+https://www.freepik.com/
