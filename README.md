@@ -97,17 +97,14 @@ Hypothesis 4:
 
 ## Project Plan
 
-| Day       |                    Plan                     |                                                  Responsibility                                                   |
-| :-------- | :-----------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
-| Monday    |          Load data, clean and EDA           |                             Perform EDA and understand relationships. Clean the data                              |
-| Tuesday   | Hypothesis creation and Feature Engineering | Based on audio feature distribution charts, create a set of hypothesis and run it past feature engineering tasks. |
-| Wednesday |         Cluster and Model creation          |                        Cluster creation, visualisation and data preparation for the model                         |
-| Thursday  |     Hyperparameter Tuning and Dashboard     |                                 Using best performance parameters for clustering                                  |
-| Friday    |                Presentation                 |                                                   Presentation                                                    |
+| Day       |                                Plan                                 |                                              Responsibility                                               |
+| :-------- | :-----------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: |
+| Tuesday   | Load data, clean, hypothesis creation, EDA, and feature engineering | Perform EDA and understand relationships. Generate 4 hypotheses including an unsupervised clustering task |
+| Wednesday |       Classification model creation and hyperparameter tuning       |                    Cluster creation, visualisation and data preparation for the model                     |
+| Thursday  |                     Dashboard and documentation                     |                      Make an engaging streamlit dashboard and update readme sections                      |
+| Friday    |                            Presentation                             |                                               Presentation                                                |
 
 ## Project Board
-
-A snapshot of the project board midway through my capstone project.
 
 ---
 
