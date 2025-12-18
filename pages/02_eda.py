@@ -35,3 +35,25 @@ with tab1:
                 accurately reflect underlying music trends and support
                 reliable, insight-driven exploration by end users.
             """)
+    
+with tab2:
+    st.title("Feature Engineering")
+    st.subheader("Audio Features")
+    st.markdown("""An important first step for this dataset was to separate 
+                out the numerical features for the clustering task and the 
+                metadata""")
+    st.markdown("""We want to cluster the data on the audio features 
+                such as **energy** and **dancability** rather than 
+                **popularity** or **song duration**""")
+    st.markdown("""We also wanted to engineer some new features which could
+                help us to categorise the songs these were\n - **Dance Energy 
+                Index**: the average value of energy and dancability. This 
+                captures “movement intensity”. It separates upbeat dance 
+                tracks from calm ones.\n - **Acoustic Profile**: the average 
+                of acousticness and instrumentalness. This helps identify 
+                acoustic / instrumental tracks.\n - **Mood Index**: the average 
+                of valance and energy. This captures the emotion of the 
+                song, i.e. sad vs happy.\n - **Vocal Presence**: 
+                1 - instrumentalness. separates instrumental tracks from
+                those with lots of speaking i.e. rap tracks.
+                """)
