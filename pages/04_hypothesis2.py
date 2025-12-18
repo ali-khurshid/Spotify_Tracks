@@ -29,13 +29,23 @@ clean = df[df["explicit"] == False]["popularity"]
 
 stat, p = mannwhitneyu(explicit, clean, alternative="two-sided")
 
-
-
 fig = plot_violin(df,
             x_col="explicit",
             y_col="popularity",
             title="Popularity Distribution by Explicit Content",
             xlabel="Explicit Content",
-            ylabel="Popularity")
+            ylabel="Popularity",
+            points=None)
 st.plotly_chart(fig)
-            
+
+st.subheader("Mann-Whitney U test")
+
+st.markdown("""We can check for a statistical difference between 
+            the two groups by using a Mann-Whitney U test""")
+st.markdown(f"p value: **{p:.2e}**")
+st.markdown("""A p-value this low (≪ 0.05) in a Mann-Whitney U test 
+            indicates very strong evidence against the null hypothesis, 
+            meaning the distributions of the two groups are statistically 
+            significantly different and the observed difference is 
+            extremely unlikely to have occurred by chance.
+            """)
