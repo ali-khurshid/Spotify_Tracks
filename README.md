@@ -1,5 +1,8 @@
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
+![alt text](Images/banner_image.jpg)
+# Spotify Tracks Recommendation Engine!
+
 ## Project Bookmarks:
 
 -   [README](https://github.com/ali-khurshid/Spotify_Tracks/blob/main/README.md)
@@ -34,6 +37,10 @@
 -   [Acknowledgements](#acknowledgements)
 
 ## Project Overview
+
+This project analyzes a dataset of Spotify tracks, including audio features, artist information, and song popularity. Through exploratory data analysis (EDA), it explores distributions and relationships between features, uncovering patterns that influence track popularity.
+
+The project also performs correlation analysis to examine how attributes like danceability, energy, and tempo relate to popularity, and applies clustering techniques to group tracks with similar audio characteristics. These insights can inform playlist curation and music recommendation strategies.
 
 ---
 
@@ -79,24 +86,37 @@ The dataset columns can be split into two categories metadata and audio features
 
 ## Hypothesis Testing and Validation
 
-Hypothesis 1: Tracks with higher danceability and energy have significantly higher popularity scores than tracks with lower values.
+**Hypothesis 1:** Tracks with higher danceability and energy have significantly higher popularity scores than tracks with lower values.
 
 -   Correlation analysis to see if there is a correlation between dancability and popularity
 
-Hypothesis 2: Explicit tracks are, on average, more popular than non-explicit tracks.
+**Hypothesis 2:** Explicit tracks are, on average, more popular than non-explicit tracks.
 
 -   Correlation analysis between explicit tracks (those that contain explicit language) and popularity to see if there is a correation between the explicit nature of the song and popularity.
 
-Hypothesis 3: Tracks with high acousticness have lower energy and lower popularity.
+**Hypothesis 3:** Tracks with high acousticness have lower energy and lower popularity.
 
 -   Calculate the correlation between acousticness and energy and acousticness and popularity
 
-Hypothesis 4: Tracks cluster into distinct musical profiles that differ significantly in popularity.
+**Hypothesis 4:** Tracks cluster into distinct musical profiles that differ significantly in popularity.
 
 -   Perform an unsupervised clustering task on the audio features to group track into distinct groups.
 -   Use a statistical test (depending on normality) to see if the popularity of the different clusters differs significantly.
 
 ## The rationale to map the business requirements to the data visualisations
+
+| Analysis Step                      | Visualization                                                         | Purpose / Insight                                                                                                |
+| ---------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Feature Exploration**            | Histograms / Boxplots of audio features                               | Understand distributions, ranges, and detect outliers in key features like energy, danceability, tempo, loudness |
+| **Categorical Feature Comparison** | Bar charts / Count plots (Explicit vs Non-explicit, Key distribution) | Compare counts across categories to understand feature prevalence and patterns                                   |
+| **Feature Relationships**          | Scatter plots (Danceability vs Popularity, Energy vs Popularity)      | Identify relationships between audio features and track popularity; visually assess correlations                 |
+| **Correlation Analysis**           | Correlation heatmap                                                   | Show which numerical features are strongly correlated; guide further analysis and feature selection              |
+| **Clustering Validation**          | Elbow plot & Silhouette scores                                        | Evaluate different k values to select the most appropriate number of clusters for grouping tracks                |
+| **Cluster Formation**              | Clustering plots (scatter with clusters / PCA)                        | Visualize clusters of tracks based on audio features; understand how tracks group together                       |
+| **Cluster Popularity Analysis**    | Boxplots & Violin plots of Popularity by Cluster                      | Compare popularity distributions across clusters; identify clusters with higher listener engagement              |
+| **Cluster Feature Profiles**       | Radar / Spider plots of audio features by cluster                     | Highlight characteristic audio feature patterns of each cluster; identify unique cluster signatures              |
+| **Track Recommendations**          | Recommendation table (based on radar plot clusters)                   | Suggest tracks similar to a given profile; enable playlist curation and personalized recommendations             |
+
 
 ## Project Plan
 
@@ -109,23 +129,43 @@ Hypothesis 4: Tracks cluster into distinct musical profiles that differ signific
 
 ## Project Board
 
----
+Our project board on Day 2 of the hackathon.
+
+![alt text](Images/project_board.jpg)
 
 ## Ethical Considerations
 
--   Data anonymization: No personally identifiable information is used.
+-   **Data anonymization –** No personally identifiable information is used.
+
+- **Fairness and bias –** The model and analyses do not discriminate against any genre, artist, or demographic. Any clustering or recommendations are based purely on audio features and popularity metrics.
+
+- **Transparency –** All datasets, methods, and algorithms are clearly documented, and code is shared for reproducibility.
+
+- **Responsible recommendations –** Suggested tracks are intended for exploration and playlist curation; the system does not influence user behavior beyond general recommendations.
+
+- **Data source acknowledgement –** The dataset is publicly available on Kaggle and used in compliance with its terms of use.
 
 ---
 
 ## Streamlit App
 
-I created a Streamlit app to allow
+We created a **Streamlit app** to allow interactive exploration and analysis of Spotify tracks.
 
-The app is a multi-paged dashboard consisting of:
+The app is a **multi-page dashboard** consisting of:
+
+- **Homepage** – Introduction to the dataset, project goals, and key features.
+
+- **EDA (Exploratory Data Analysis)** – Visualizations of feature distributions, correlations, and relationships with popularity.
+
+- **Analysis ➡️ Hypothesis Testing** – Statistical analysis to test relationships between track features and popularity.
+
+- **Clustering** – Clustering tracks based on audio features with PCA and cluster visualizations. This also includes personalized track recommendations based on cluster profiles and audio features.
+
+---
 
 ## Unfixed Bugs
 
----
+No unfixed bugs to report.
 
 ## Development Roadmap
 
@@ -179,6 +219,6 @@ The following libraries were used in my project.
 
 ## Acknowledgements
 
--   Special thanks to our facilitator Emma Lamont, Our Tutors Neil, Michael and Spencer for making this course easy to learn.
+-   Special thanks to our facilitator Emma Lamont, Our Tutors Neil, Michael, Mark and Spencer for making this course easy to learn.
 -   I'd like to thank all my colleagues for being a fun group to work with.
-    https://www.freepik.com/
+
