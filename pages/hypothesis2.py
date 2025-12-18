@@ -7,12 +7,12 @@ import streamlit as st
 from utils.data_processing import load_data
 from utils.visualisation import plot_violin
 
-st.title("🎵 Hypothesis 2 — Popularity of Explicit vs Non-Explicit Tracks")
+st.subheader("🎵 Hypothesis 2 — Popularity of Explicit vs Non-Explicit Tracks")
 
-st.markdown("""$H_0$: There is no statistically significant difference in average 
+st.markdown("""$H_0$ : There is no statistically significant difference in average 
             popularity between explicit and non-explicit tracks.""")
 
-st.markdown("""$H_1$: Explicit tracks are, on average, more popular than 
+st.markdown("""$H_1$ : Explicit tracks are, on average, more popular than 
             non-explicit tracks.""")
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
