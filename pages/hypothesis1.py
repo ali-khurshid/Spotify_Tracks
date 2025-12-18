@@ -11,14 +11,12 @@ from utils.visualisation import plot_scatter
 
 st.subheader("🎵 Hypothesis 1: Features vs. Popularity")
 
-col1, col2 = st.columns([1, 2])
 
-with col1:
-    st.latex(r"""
-\begin{aligned}
-H_{0} &= \text{There is no statistically significant relationship between a track’s danceability or energy and its popularity score.} \\
-H_{1} &= \text{Tracks with higher danceability and energy have significantly higher popularity scores than tracks with lower values.}
-\end{aligned}
+st.markdown("""
+$H_{0}$ : There is no statistically significant relationship between a track’s danceability or energy and its popularity score.
+            """)
+st.markdown("""
+$H_{1}$ : Tracks with higher danceability and energy have significantly higher popularity scores than tracks with lower values.
 """)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
