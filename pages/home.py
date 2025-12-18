@@ -9,7 +9,7 @@ with st.container():
     st.markdown(
         """
         <div style='text-align:center; white-space: nowrap; font-size:40px; font-weight:bold; color:black; margin-top:20px;'>
-        Spotify Recommendation Engine!
+        Spotify Tracks Cluster Analysis Dashboard
         </div>
         """,
         unsafe_allow_html=True
