@@ -9,8 +9,6 @@ from scipy.stats import spearmanr
 from utils.data_processing import load_data
 from utils.visualisation import plot_scatter
 
-st.subheader("💿 Spotify Tracks")
-
 st.subheader("🎵 Hypothesis 3: Acousticness vs. Energy and Popularity")
 
 col1, col2 = st.columns([1, 2])
