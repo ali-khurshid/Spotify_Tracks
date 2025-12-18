@@ -1,9 +1,19 @@
 """
 Exploratory Data Analysis Page
 """
-
+import matplotlib.pyplot as plt
+import pandas as pd
+from pathlib import Path
+import plotly.express as px
+import seaborn as sns
 import streamlit as st
+from utils.data_processing import load_data
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DATA_DIR = PROJECT_ROOT / "data" / "clean"
+INPUT_CSV = DATA_DIR / "spotify_clean.csv"
+# load csv into dataframe
+df = load_data(INPUT_CSV)
 
 st.subheader("Exploratory Data Analysis")
 
@@ -56,4 +66,22 @@ with tab2:
                 song, i.e. sad vs happy.\n - **Vocal Presence**: 
                 1 - instrumentalness. separates instrumental tracks from
                 those with lots of speaking i.e. rap tracks.
+                """)
+with tab3:
+    st.title("Correlations")
+
+    plt.figure(figsize=(10,8))
+    correlation_matrix = df.corr(numeric_only=True)
+    sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm', square=True)
+    plt.title('Correlation Heatmap of Audio Features')
+    st.pyplot(plt.gcf())
+    plt.clf()
+
+    st.markdown("""The correlation heatmap shows that most audio features 
+                have **weak relationships with popularity**, suggesting no single 
+                feature strongly drives popularity on its own. Strong 
+                correlations appear mainly **between audio features themselves**, 
+                such as energy and loudness (strong positive) and energy and 
+                acousticness (strong negative), indicating expected musical 
+                relationships rather than direct links to popularity.
                 """)
