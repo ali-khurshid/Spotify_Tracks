@@ -23,7 +23,7 @@ st.markdown("""
          
 **Developed by:** AudioBuddy Inc.
 
-**Creators:** Ali Khurshid, Robert Steven Elliot , Tom Burgess
+**Creators:** Ali Khurshid, Robert Elliott , Tom Burgess
 """)
 #--------------Dataset section------------------#
 
