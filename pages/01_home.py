@@ -3,17 +3,27 @@ import streamlit as st
 #Display banner at top
 
 
-col1, col2, col3 = st.columns([1, 3, 1])
+with st.container():
+    st.image("Images/banner_image.jpg", use_container_width=True)
+    
+    st.markdown(
+        """
+        <div style='text-align:center; white-space: nowrap; font-size:40px; font-weight:bold; color:black; margin-top:20px;'>
+        Spotify Recommendation Engine!
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-with col2:
-    st.image("Images/banner_image.jpg", width = 1300)
+st.write("")
 
 st.markdown("""
-Spotify tracks clustered by audio features.
-Navigate using the sidebar to explore diffeent sections of this dashboard.      
+
+            **Navigate using the sidebar to explore diffeent sections of this dashboard.**      
          
-- **Developed by:** AudioBuddy Inc.
-- **Creators**: Ali Khurshid, Robert Steven Elliot , Collins, Tom Burgess
+**Developed by:** AudioBuddy Inc.
+
+**Creators:** Ali Khurshid, Robert Steven Elliot , Tom Burgess
 """)
 #--------------Dataset section------------------#
 
@@ -31,11 +41,23 @@ st.markdown("""
 st.subheader("Original Dataset")
 
 st.markdown("""
+            This project aims to:
+
+**1.** Explore correlations between audio features.
+
+**2.** Create hypotheses for analysis.
+
+**3** Use insights for **classification and recommendation purposes.**
+            
+            """)
+
+st.markdown("""
 The spotify tracks dataset includes audio features alongside names of artists and the popularity ratings of their songs.
 This project aims to explore how the audio features are correlated to each other and the number of Hypotheses that can be created. 
 These are then used for **Classification** purposes.
-The dataset consists of the following features.
             """)
+
+st.subheader("Dataset Features")
             
 # Two columns for dataset features
 col1, col2 = st.columns(2)
