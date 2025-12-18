@@ -1,0 +1,286 @@
+from pathlib import Path
+import pandas as pd
+import streamlit as st
+import plotly.express as px
+import plotly.graph_objects as go
+import yaml
+
+MARGINS = dict(l=40, r=40, t=40, b=40)
+
+# Root directory of the project
+ROOT = Path(__file__).parent.parent
+
+CLUSTER_COLORS_INT = {
+    0: "#1f77b4",
+    1: "#ff7f0e",
+    2: "#2ca02c",
+    3: "#d62728",
+    4: "#9467bd",
+}  # Cluster ID to color mapping
+
+# Convert integer keys to string for Plotly color mapping
+CLUSTER_COLORS_STR = {str(k): v for k, v in CLUSTER_COLORS_INT.items()}
+
+# Paths to data files
+CLUSTERED_DATA = ROOT / "model_outputs" / "spotify_clustered.csv"
+CLUSTER_PROFILES = ROOT / "yaml" / "cluster_profiles.yml"
+
+@st.cache_data
+def load_clustered_data() -> pd.DataFrame:
+    """
+    Load clustered data from a CSV file.
+    Args:
+        file_path (Path): Path to the CSV file containing clustered data.
+    Returns:
+        pd.DataFrame: DataFrame with clustered data.
+    """
+    df = pd.read_csv(CLUSTERED_DATA)
+
+    # Ensure 'cluster' column is of type int
+    if 'cluster' in df.columns:
+        df['cluster'] = df['cluster'].astype(int)
+
+    for col in df.select_dtypes(include=['object']).columns:
+        df[col] = df[col].astype("category")
+
+    if 'artists' in df.columns:
+        df['artists'] = df['artists'].astype("string")
+
+    if 'name' in df.columns:
+        df['name'] = df['name'].astype("string")
+
+    return df
+
+
+@st.cache_data
+def load_pca_data() -> pd.DataFrame:
+    """
+    Load PCA data from a CSV file.
+    Args:
+        None
+    Returns:
+        pd.DataFrame: DataFrame with PCA data.
+    """
+    df = pd.read_csv(ROOT / "model_outputs" / "pca_coords.csv")
+
+    return df
+
+
+
+def make_cluster_radar(df: pd.DataFrame, cluster_id: int,
+                       features: list[str]) -> go.Figure:
+    """
+    Creates a normalised radar chart for a given cluster.
+    Normalisation is done over cluster-level means for each feature.
+    Parameters:
+        df : pd.DataFrame
+            Must contain 'cluster' column and feature columns.
+        cluster_id : int
+            Cluster to plot.
+        features : list[str]
+            List of feature column names to include in the radar chart.
+    Returns:
+        go.Figure
+    """
+
+    # Get colour for the cluster
+    color = CLUSTER_COLORS_INT[cluster_id]
+
+    # Compute normalised means
+    cluster_means_all = df.groupby("cluster")[features].mean()
+
+    # Normalisation
+    feature_min = cluster_means_all.min()
+    feature_max = cluster_means_all.max()
+
+    # avoid division by zero
+    denom = (feature_max - feature_min).replace(0, 1e-9)
+
+    # Get this cluster's normalised means
+    this_cluster_mean = cluster_means_all.loc[cluster_id]
+
+    # Scale to [0, 1]
+    scaled = (this_cluster_mean - feature_min) / denom
+
+    # Prepare data for radar chart
+    theta = list(features) + [features[0]]
+
+    # Close the radar chart loop
+    r = scaled.tolist() + [scaled.tolist()[0]]
+
+    # Create radar chart
+    fig = go.Figure(
+        data=go.Scatterpolar(
+            r=r,
+            theta=theta,
+            fill="toself",
+            name=f"Cluster {cluster_id}",
+            line=dict(color=color),
+            marker=dict(color=color),
+        )
+    )
+
+    # Update layout
+    fig.update_layout(
+        title=f"Cluster {cluster_id} — Normalised Feature Profile",
+        polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
+        showlegend=False,
+        margin=MARGINS,
+        height=400,
+        width=400
+    )
+
+    return fig
+
+
+def pca_cluster_scatter(df: pd.DataFrame) -> go.Figure:
+    """
+    Creates a PCA scatter plot colored by cluster.
+    Parameters:
+        df : pd.DataFrame
+            Must contain 'pc1', 'pc2', and 'cluster' columns.
+    Returns:
+        go.Figure
+    """
+
+    # Ensure cluster is string for color mapping
+    df["cluster"] = df["cluster"].astype(str)
+
+    # Create scatter plot
+    fig = px.scatter(
+        df.sort_values("cluster"),
+        x="pc1",
+        y="pc2",
+        color="cluster",
+        color_discrete_map=CLUSTER_COLORS_STR,
+        hover_data=["cluster"],
+        opacity=0.8,
+        title="PCA Scatter Plot of Clusters",
+        labels={"pc1": "Principal Component 1", "pc2": "Principal Component 2"}
+    )
+
+    # Update layout
+    fig.update_layout(legend_title_text="Cluster",
+                      margin=MARGINS,
+                      height=400)
+
+    return fig
+
+
+@st.cache_data
+def load_cluster_profiles() -> dict:
+    """
+    Load cluster profiles from a YAML file.
+
+    Args:
+        path (Path): Path to the YAML file containing cluster profiles.
+    Returns:
+        dict: Cluster profiles with normalized keys.
+    """
+
+    with open(CLUSTER_PROFILES, "r", encoding="utf-8") as f:
+        profiles = yaml.safe_load(f) or {}
+    # normalise keys to int where possible
+    normalised = {}
+    for k, v in profiles.items():
+        try:
+            normalised[int(k)] = v
+        except (ValueError, TypeError):
+            normalised[k] = v
+    return normalised
+
+@st.cache_data
+def load_silhouette_values() -> pd.DataFrame:
+    """
+    Load silhouette values for clusters.
+
+    Returns:
+        pd.DataFrame: Silhouette values data.
+    """
+    df = pd.read_csv(ROOT / "model_outputs" / "silhouette_values.csv")
+
+    return df
+
+
+def silhouette_plot(df_sil: pd.DataFrame,
+                    selected_cluster: int) -> go.Figure:
+    """
+    Creates a horizontal silhouette plot for all clusters.
+
+    Parameters
+        df_sil : pd.DataFrame
+            Must contain 'cluster' and 'silhouette' columns.
+        selected_cluster : int
+            Cluster to highlight.
+        color_map : dict
+            Mapping of cluster_id -> colour hex string.
+
+    Returns
+    -------
+    go.Figure
+    """
+
+    df_sil_sorted = df_sil.sort_values(["cluster", "silhouette"])
+    clusters = sorted(df_sil_sorted["cluster"].unique())
+    color_map = CLUSTER_COLORS_INT
+    fig = go.Figure()
+
+    y_offset = 0
+    yticks = []
+    ytick_labels = []
+
+    for cluster in clusters:
+        cluster_values = df_sil_sorted[df_sil_sorted["cluster"]
+                                       == cluster]["silhouette"]
+        n_points = len(cluster_values)
+
+        # Standardised colour from your cluster mapping
+        color = color_map.get(cluster, "#333333")  # fallback colour
+
+        # Selected cluster = highlight
+        opacity = 0.9 if cluster == selected_cluster else 0.25
+
+        # Add silhouette bar series
+        fig.add_trace(go.Bar(
+            x=cluster_values,
+            y=list(range(y_offset, y_offset + n_points)),
+            orientation="h",
+            marker=dict(color=color, opacity=opacity),
+            hoverinfo="x+y",
+            showlegend=False,
+        ))
+
+        # Y-axis cluster label position
+        yticks.append(y_offset + n_points / 2)
+        ytick_labels.append(f"Cluster {cluster}")
+
+        y_offset += n_points  # move to next block
+
+    # Average silhouette score
+    avg_sil = df_sil["silhouette"].mean()
+
+    # Add average silhouette line
+    fig.add_vline(
+        x=avg_sil,
+        line_dash="dash",
+        line_color="grey",
+        annotation_text=f"Avg Silhouette = {avg_sil:.3f}",
+        annotation_position="top right"
+    )
+
+    # Update layout
+    fig.update_layout(
+        title="Silhouette Plot (Cluster Quality)",
+        xaxis_title="Silhouette score",
+        yaxis=dict(
+            tickmode="array",
+            tickvals=yticks,
+            ticktext=ytick_labels,
+            showgrid=False
+        ),
+        height=400,
+        bargap=0.05,
+        margin=MARGINS
+    )
+
+    return fig
