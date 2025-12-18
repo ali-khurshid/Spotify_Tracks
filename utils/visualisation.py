@@ -67,6 +67,7 @@ def plot_violin(df: pd.DataFrame,
         title (str): Title of the plot.
         xlabel (str): Label for the x-axis.
         ylabel (str): Label for the y-axis.
+        points (str): Type of points to show on the violin plot.
     """
     fig = px.violin(
         df,
