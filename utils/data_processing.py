@@ -3,20 +3,35 @@ import pandas as pd
 
 
 def clean_track_name(name: str) -> str:
+    """
+    Clean track name by removing extraneous information such as text in brackets
+    and dash-based suffixes.
+    Args:
+        name (str): Original track name.
+    Returns:
+        str: Cleaned track name.
+    """
+
+    # Handle missing values
     if pd.isna(name):
         return name
 
+    # Ensure name is a string
     name = str(name)
 
     # Remove text in brackets
     for sep in [" (", " ["]:
+        # Check if the separator is in the name
         if sep in name:
+            # Take part before the separator
             name = name.split(sep, 1)[0]
 
     # Remove dash-based suffixes ONLY if space-dash-space or space-dash
     if " - " in name:
+        # Take part before the first " - "
         name = name.split(" - ", 1)[0]
 
+    # Remove trailing spaces
     return name.strip()
 
 
@@ -38,10 +53,10 @@ def load_data(file_path: str,
     """
 
     # Set default values for optional parameters
-    string_cols = string_cols or []
-    date_cols = date_cols or []
-    rename_dict = rename_dict or {}
-    remove_cols = remove_cols or []
+    string_cols = string_cols or []  # list of string columns
+    date_cols = date_cols or []  # list of date columns
+    rename_dict = rename_dict or {}  # dictionary for renaming columns
+    remove_cols = remove_cols or []  # list of columns to remove
 
     # Load the CSV file
     df = pd.read_csv(file_path)
@@ -63,6 +78,7 @@ def load_data(file_path: str,
     # Process date columns
     for col in date_cols or []:
         if col in df.columns:
+            # Convert to datetime, coerce errors to NaT
             df[col] = pd.to_datetime(df[col], errors='coerce')
 
     # Convert remaining object columns to category dtype
@@ -79,8 +95,8 @@ def load_data(file_path: str,
         df['name'] = df['name'].apply(clean_track_name)
         df["name"] = (
             df["name"]
-            .str.lower()
-            .str.strip()
+            .str.lower()  # Convert to lowercase
+            .str.strip()  # Remove leading/trailing whitespace
         )
 
     if 'artist_name' in df.columns:
@@ -88,18 +104,18 @@ def load_data(file_path: str,
 
     df["artist_primary"] = (
         df["artists"].astype(str)
-        .str.split(";", n=1)
-        .str[0]
-        .str.lower()
-        .str.strip()
+        .str.split(";", n=1)  # Split at the first semicolon
+        .str[0]  # Take the first part as the primary artist
+        .str.lower()  # Convert to lowercase
+        .str.strip()  # Remove leading/trailing whitespace
     )
 
     df = (
         df.sort_values("popularity", ascending=False).drop_duplicates(
                 subset=["name", "artist_primary"],
                 keep="first"
-            )
-        )
+            )  # Keep the most popular track version
+        )  # Sort by popularity and remove duplicates based on track name and primary artist
 
     # Remove duplicates and rows with missing values
     df.drop_duplicates(inplace=True)
