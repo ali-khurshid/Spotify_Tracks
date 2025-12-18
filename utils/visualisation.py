@@ -55,7 +55,9 @@ def plot_violin(df: pd.DataFrame,
                 y_col: str,
                 title: str = "",
                 xlabel: str = "",
-                ylabel: str = "") -> None:
+                ylabel: str = "",
+                points: str = "all"
+                ) -> None:
     """
     Plots a violin plot using Plotly Express.
     Args:
@@ -72,7 +74,7 @@ def plot_violin(df: pd.DataFrame,
         y=y_col,
         labels={x_col: xlabel, y_col: ylabel},
         box=True,
-        points="all",
+        points=points,
         title=title
     )
     fig.update_layout(margin=MARGINS)
