@@ -23,7 +23,7 @@ NUMERIC_FEATURES = df.select_dtypes(include=['float64',
                                              'int64']).columns.tolist()
 NUMERIC_FEATURES.remove('cluster')  # Remove cluster column if present
 
-col = st.columns([1, 2, 2])
+col = st.columns([1, 2, 4, 2])
 with col[0]:
     st.radio(options=list(cluster_profiles.keys()),
              index=0,
@@ -44,6 +44,27 @@ with col[1]:
             st.markdown(f"- {note}")
 
 with col[2]:
+    tab = st.tabs(["Radar Plot", "Silhouette Analysis", "PCA Visualization"])
+
+    with tab[0]:
+        st.markdown(f"### :material/radar:\
+                        Radar Plot for Cluster {selected_cluster}")
+        st.plotly_chart(make_cluster_radar(df,
+                                        selected_cluster,
+                                        NUMERIC_FEATURES),
+                        use_container_width=True)
+
+    with tab[1]:
+        st.header(":material/insights: Silhouette Plot (Cluster Quality)")
+        st.plotly_chart(silhouette_plot(df_sil, selected_cluster),
+                        use_container_width=True)
+    with tab[2]:
+        st.header(":material/scatter_plot: PCA Cluster Visualisation")
+        st.plotly_chart(pca_cluster_scatter(df_pca),
+                        use_container_width=True)
+    
+
+with col[3]:
     st.markdown("### Top 5 Songs")
     top_10 = df[df["cluster"] == selected_cluster]\
         .nlargest(5, "popularity")\
@@ -58,22 +79,4 @@ with col[2]:
                  hide_index=True,
                  use_container_width=True)
 
-tab = st.tabs(["Radar Plot", "Silhouette Analysis", "PCA Visualization"])
 
-with tab[0]:
-    st.markdown(f"### :material/radar:\
-                    Radar Plot for Cluster {selected_cluster}")
-    st.plotly_chart(make_cluster_radar(df,
-                                       selected_cluster,
-                                       NUMERIC_FEATURES),
-                    use_container_width=True)
-
-with tab[1]:
-    st.header(":material/insights: Silhouette Plot (Cluster Quality)")
-    st.plotly_chart(silhouette_plot(df_sil, selected_cluster),
-                    use_container_width=True)
-with tab[2]:
-    st.header(":material/scatter_plot: PCA Cluster Visualisation")
-    st.plotly_chart(pca_cluster_scatter(df_pca),
-                    use_container_width=True)
-    
