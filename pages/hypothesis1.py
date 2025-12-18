@@ -9,8 +9,6 @@ from scipy.stats import pearsonr
 from utils.data_processing import load_data
 from utils.visualisation import plot_scatter
 
-st.subheader("💿 Spotify Tracks")
-
 st.subheader("🎵 Hypothesis 1: Features vs. Popularity")
 
 col1, col2 = st.columns([1, 2])
