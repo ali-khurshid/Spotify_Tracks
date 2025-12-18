@@ -1,44 +1,44 @@
 0:
-  name: "Moody Dance Pop"
-  summary: "Danceable tracks with moderate energy and a darker, more introspective mood."
+  name: "Acoustic Mid-Tempo Pop"
+  summary: "Moderately danceable, low-energy tracks with strong acoustic influence and a relaxed mood."
   notes:
-    - "High danceability with controlled energy levels."
-    - "Low valence indicates emotionally restrained or reflective tracks."
-    - "Very low acousticness and instrumentalness suggest polished, vocal-led production."
-    - "Up-tempo tracks suited to late-night or emotional dance settings."
+    - "High acousticness indicates organic, unplugged production."
+    - "Lower energy and loudness create a calm, laid-back feel."
+    - "Moderate valence suggests neutral to mildly positive mood."
+    - "Vocal-led tracks suited to easy listening or background playlists."
 
 1:
-  name: "Upbeat Electronic Pop"
-  summary: "Energetic, positive tracks with a strong electronic and mainstream appeal."
+  name: "Instrumental Electronic Grooves"
+  summary: "Energetic tracks with strong instrumental focus and electronic production."
   notes:
-    - "High energy and danceability typical of radio-friendly dance music."
-    - "Medium-high valence reflects an upbeat, feel-good mood."
-    - "Some instrumental presence alongside prominent vocals."
-    - "Loud, polished production suited to clubs and charts."
+    - "High energy combined with very high instrumentalness."
+    - "Lower vocal presence indicates minimal or absent vocals."
+    - "Moderate danceability with club-oriented tempo."
+    - "Suitable for instrumental EDM, background beats, or gaming music."
 
 2:
-  name: "Happy Acoustic Grooves"
-  summary: "Warm, joyful tracks combining high danceability with strong acoustic elements."
+  name: "Upbeat Vocal Dance Tracks"
+  summary: "High-energy, danceable tracks with a positive mood and strong vocal presence."
   notes:
-    - "Very high valence creates a cheerful, uplifting mood."
-    - "High acousticness gives an organic, natural sound."
-    - "Lower loudness compared to electronic-focused clusters."
-    - "Suitable for indie pop, acoustic grooves, and summer playlists."
+    - "High valence reflects an upbeat, feel-good sound."
+    - "Balanced acousticness with modern production."
+    - "Strong vocal presence makes tracks lyric-driven."
+    - "Typical of mainstream pop and dance hits."
 
 3:
-  name: "High-Energy Anthems"
-  summary: "Intense, loud tracks driven by extremely high energy and emotional impact."
+  name: "Ambient Acoustic Instrumentals"
+  summary: "Low-energy, highly acoustic and instrumental tracks with subdued emotional tone."
   notes:
-    - "Highest energy levels across all clusters."
-    - "Loud, aggressive production style."
-    - "Lower valence suggests dramatic or confrontational moods."
-    - "Common in workout music, festival anthems, and rock-EDM hybrids."
+    - "Very high acousticness and instrumentalness."
+    - "Lowest energy and loudness across all clusters."
+    - "Low valence creates a calm, introspective mood."
+    - "Represents ambient, classical, or soundtrack-style music."
 
 4:
-  name: "Groovy Dance Tracks"
-  summary: "Rhythm-focused, highly danceable tracks with a relaxed tempo and balanced mood."
+  name: "High-Energy Rhythmic Pop"
+  summary: "Energetic, beat-driven tracks with moderate danceability and strong vocal presence."
   notes:
-    - "Highest danceability of all clusters."
-    - "Moderate energy paired with slower tempo."
-    - "Low acousticness indicates modern, beat-driven production."
-    - "Fits groove-based dance, pop, and hip-hop-influenced tracks."
+    - "High energy and tempo support active listening."
+    - "Lower acousticness indicates synthetic, studio-heavy production."
+    - "Moderate valence suggests emotional neutrality rather than overt happiness."
+    - "Common in modern pop, workout, or radio playlists."
