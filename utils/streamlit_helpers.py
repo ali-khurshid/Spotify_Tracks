@@ -53,6 +53,20 @@ def load_clustered_data() -> pd.DataFrame:
 
 
 @st.cache_data
+def load_mann_whitney_results() -> pd.DataFrame:
+    """
+    Load Mann-Whitney U test results from a CSV file.
+    Args:
+        None
+    Returns:
+        pd.DataFrame: DataFrame with Mann-Whitney U test results.
+    """
+    df = pd.read_csv(ROOT / "model_outputs" / "mw_popularity_results.csv")
+
+    return df
+
+
+@st.cache_data
 def load_pca_data() -> pd.DataFrame:
     """
     Load PCA data from a CSV file.
@@ -64,7 +78,6 @@ def load_pca_data() -> pd.DataFrame:
     df = pd.read_csv(ROOT / "model_outputs" / "pca_coords.csv")
 
     return df
-
 
 
 def make_cluster_radar(df: pd.DataFrame, cluster_id: int,
@@ -282,5 +295,38 @@ def silhouette_plot(df_sil: pd.DataFrame,
         bargap=0.05,
         margin=MARGINS
     )
+
+    return fig
+
+
+def cluster_violin(df: pd.DataFrame) -> px.violin:
+    """
+    Creates a violin plot showing popularity distribution by cluster.
+    Parameters:
+        df : pd.DataFrame
+            Must contain 'cluster' and 'popularity' columns.
+    Returns:
+        px.violin
+    """
+
+    fig = px.violin(
+        df.sort_values("cluster"),
+        x="cluster",
+        y="popularity",
+        box=True,
+        points="outliers",
+        title="Popularity Distribution by Music Cluster",
+        labels={
+            "cluster": "Cluster",
+            "popularity": "Popularity Score"
+        },
+        color="cluster",
+        color_discrete_map=CLUSTER_COLORS_INT
+    )
+
+    fig.update_layout(
+        xaxis=dict(type="category"),
+        yaxis=dict(title="Popularity"),
+        margin=MARGINS)
 
     return fig

@@ -3,19 +3,33 @@ Streamlit page for clustering analysis and visualization.
 '''
 
 import streamlit as st
+
 from utils.streamlit_helpers import (load_cluster_profiles,
                                      load_clustered_data,
                                      load_pca_data,
                                      load_silhouette_values,
                                      make_cluster_radar,
                                      pca_cluster_scatter,
-                                     silhouette_plot)
+                                     silhouette_plot,
+                                     cluster_violin,
+                                     load_mann_whitney_results)
 
 cluster_profiles = load_cluster_profiles()
 df = load_clustered_data()
 df_pca = load_pca_data()
 df_sil = load_silhouette_values()
+man_whitney_df = load_mann_whitney_results()
 
+cols_to_round = ["u_stat", "p_value", "p_adj"]
+
+df_display = (
+    man_whitney_df
+    .sort_values(by="cluster")
+    .reset_index(drop=True)
+    .copy()
+)
+
+df_display[cols_to_round] = df_display[cols_to_round].round(3)
 
 st.subheader("Clustering Analysis")
 
@@ -44,7 +58,7 @@ with col[1]:
             st.markdown(f"- {note}")
 
 with col[2]:
-    tab = st.tabs(["Radar Plot", "Silhouette Analysis", "PCA Visualization"])
+    tab = st.tabs(["Radar Plot", "Silhouette Analysis", "PCA Visualization", "Popularity Distribution", "Mann-Whitney U Test Results"])
 
     with tab[0]:
         st.markdown(f"### :material/radar:\
@@ -62,6 +76,18 @@ with col[2]:
         st.header(":material/scatter_plot: PCA Cluster Visualisation")
         st.plotly_chart(pca_cluster_scatter(df_pca),
                         use_container_width=True)
+        
+    with tab[3]:
+        st.header(":material/bar_chart: Popularity Distribution")
+        st.plotly_chart(cluster_violin(df))
+
+    with tab[4]:
+        st.header(":material/table_chart: Mann-Whitney U Test Results")
+        st.dataframe(
+                    df_display,
+                    hide_index=True,
+                    use_container_width=True
+                )
 
 with col[3]:
     st.markdown("### Top 5 Songs")
