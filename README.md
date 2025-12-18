@@ -10,9 +10,9 @@
 
 | Name        | Responsibility|
 |---------------|-------------|
-| Robert      | Data Architect |
-| Ali     | Project Manager |
-| Tom     | Data Analyst |
+| Robert Elliott     | Data Architect |
+| Ali Khurshid     | Project Manager |
+| Tom Burgess| Data Analyst |
 | Project Type: |	Hackathon 2 |
 | Date:         |	December 2025 |
 
