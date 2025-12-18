@@ -263,9 +263,9 @@ The following libraries were used in my project.
 
 ### Media
 
--   Streamlit banner image taken from [Freepik](https://www.freepik.com/)
+-   Streamlit banner image taken from [Freepik](https://www.freepik.com)
 -   Code Institute Logo taken from Code Institute website.
--   For presention purposes [Website mockup generator](htpps://websitemockupgenerator.com/) used.
+-   For presention purposes [Website Mockup Generator](htpps://websitemockupgenerator.com) used.
 
 ## Acknowledgements
 
