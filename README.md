@@ -4,7 +4,17 @@
   <img src="Images/banner_image.jpg" alt="Spotify Banner" width="800"/>
 </p>
 
-<h1 align="center">Spotify Tracks Recommendation Engine!</h1>
+<h1 align="center">Spotify Tracks Unsupervised Clustering</h1>
+
+## Project Members
+
+| Name        | Responsibility|
+|---------------|-------------|
+| Robert      | Data Architect |
+| Ali     | Project Manager |
+| Tom     | Data Analyst |
+| Project Type: |	Hackathon 2 |
+| Date:         |	December 2025 |
 
 ## Project Bookmarks:
 
@@ -16,7 +26,7 @@
 -   [Hypothesis 1 Features vs popularity](https://github.com/ali-khurshid/Spotify_Tracks/blob/main/notebooks/04_H1_features_vs_popularity.ipynb)
 -   [Hypothesis 2 Explicit vs Non-explicit Tracks](https://github.com/ali-khurshid/Spotify_Tracks/blob/main/notebooks/05_H2_explicit_vs_nonexplicity.ipynb)
 -   [Hypothesis 3 Acousticness vs Energy and popularity](https://github.com/ali-khurshid/Spotify_Tracks/blob/main/notebooks/06_H3_acousticness_vs_energy_and_popularity.ipynb)
--   [Streamlit]()
+-   [Streamlit](https://spotify-clustering-project.streamlit.app/)
 -   [Conclusion and Discussion](#conclusion-and-discussion)
 
 ## Table of Contents:
@@ -31,6 +41,7 @@
 -   [Project Board](#project-board)
 -   [Ethical Consideration](#ethical-considerations)
 -   [Streamlit App](#streamlit-app)
+-   [Deployment to the Streamlit Cloud](#deployment-to-streamlit-cloud)
 -   [Unfixed Bugs and Challenges Faced](#unfixed-bugs-and-challenges-faced)
 -   [Development Roadmap](#development-roadmap)
 -   [Main data Analysis Libraries](#main-data-analysis-libraries)
@@ -164,6 +175,10 @@ The app is a **multi-page dashboard** consisting of:
 
 - **Clustering** – Clustering tracks based on audio features with PCA and cluster visualizations. This also includes personalized track recommendations based on cluster profiles and audio features.
 
+## Deployment to Streamlit Cloud
+
+- **“Experience the interactive Streamlit app here:”** https://spotify-clustering-project.streamlit.app/
+
 ---
 
 ## Unfixed Bugs
@@ -174,7 +189,21 @@ No unfixed bugs to report.
 
 <u>**Challenges Faced**</u>
 
+- The original dataset was very messy with lots of duplicate track names. This posed a challenge during the data cleaning process.
+
+- The column names were difficult to interpret which caused feature engineering to become a bit tough.
+
+- Our k-value changed from 6 to 5 with no reason. We are still unable to explain why it happened.
+
 <u>**What Next**</u>
+
+We plan to apply our cluster model on unseen Spotify data to evaluate its performance in practice. This will help us:
+
+- Identify any tweaks or improvements needed in clustering or recommendation logic.
+
+- Ensure the model is generalizable beyond the original dataset.
+
+- Test whether the recommendations remain relevant and accurate for new tracks.
 
 ---
 
@@ -189,6 +218,8 @@ The following libraries were used in my project.
 -   `os`
 -   `Pandas`
 -   `pyexpat`
+-   `plotly` . `express`
+-   `plotly` . `graph_objects`
 -   `scipy` . `stats`
 -   `seaborn`
 -   `sklearn` . `pipeline`
@@ -206,19 +237,35 @@ The following libraries were used in my project.
 
 ## Findings
 
+- It was possible to group the cleaned and processed data into clusters.
+
+- ChatGPT was able to identify the musical characteristics of each cluster.
+
+- We used the 5 clusters to identify the top 5 songs from our dataset.
+
 ## Conclusion and Discussion
+
+| Hypothesis | Analysis / Method | Conclusion |
+|------------|-----------------|------------|
+| **H1:** Tracks with higher danceability and energy have significantly higher popularity scores than tracks with lower values. | Correlation analysis between `danceability` & `popularity` and `energy` & `popularity` | Hypothesis 1 is partially supported. Danceability shows a weak but statistically significant positive relationship with popularity, suggesting it contributes marginally to a track’s success. Energy, however, demonstrates a negligible correlation with popularity despite statistical significance, indicating it is not a meaningful standalone predictor. Overall, audio features alone are insufficient to explain popularity, highlighting the influence of external factors such as marketing, artist reputation, and listener trends. Given the weak effect sizes, popularity is likely driven by a combination of musical, social, and industry factors rather than individual audio characteristics. |
+| **H2:** Explicit tracks are, on average, more popular than non-explicit tracks. | Correlation analysis between `explicit` tracks and `popularity` |Hypothesis 2 is supported. A Mann–Whitney U test indicates a statistically significant difference in popularity between explicit and non-explicit tracks (p < 0.001). This suggests that explicit content is associated with different popularity outcomes, potentially reflecting listener preferences or broader cultural trends. However, effect size analysis would be required to assess the practical importance of this difference.  |
+| **H3:** Tracks with high acousticness have lower energy and lower popularity. | Correlation between `acousticness` & `energy` and `acousticness` & `popularity` | Hypothesis 3 is partially supported. Acousticness shows a strong and statistically significant negative relationship with energy (ρ = −0.715, p < 0.001), confirming that more acoustic tracks tend to be lower in energy. However, the relationship between acousticness and popularity is negligible (ρ = 0.020), indicating that acoustic qualities alone do not meaningfully influence a track’s popularity. This suggests that musical style affects track characteristics but does not directly translate into commercial success.  |
+| **H4:** Tracks cluster into distinct musical profiles that differ significantly in popularity. | Unsupervised clustering on audio features to form clusters; statistical test (e.g., ANOVA or Kruskal-Wallis) to compare popularity across clusters | Hypothesis 4 is supported. The clustering analysis identified distinct musical profiles based on audio features, and these clusters exhibit statistically significant differences in track popularity. The Kruskal–Wallis test confirmed that popularity distributions vary across clusters, while post-hoc Mann–Whitney U tests showed that several clusters differ significantly from others even after controlling for multiple comparisons. Visual evidence from boxplots, violin plots, and cluster summaries further reinforces that popularity is systematically associated with specific combinations of musical characteristics. This indicates that track popularity is not randomly distributed, but is meaningfully influenced by underlying audio feature profiles. |
+
 
 ## Credits
 
 ### Content
 
--   ChatGPT helped me rephrase my englih and sentence construction in this document.
--   ChatGPT was used to help create code and debug errors. It alsohelped unblock deployment of my Streamlit app to the cloud, which took several hours to complete.
+-   ChatGPT was used to help create code and debug errors.
+-   Microsoft Co-Pilot was used to help with code suggestions for the clustering.
 -   Dataset downloaded from [Kaggle](https://www.kaggle.com/datasets).
 
 ### Media
 
--   Streamlit banner image taken from [Freepik](https://www.freepik.com/)
+-   Streamlit banner image taken from [Freepik](https://www.freepik.com)
+-   Code Institute Logo taken from Code Institute website.
+-   For presention purposes [Website Mockup Generator](https://websitemockupgenerator.com/) used.
 
 ## Acknowledgements
 
