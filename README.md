@@ -1,7 +1,10 @@
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-![alt text](Images/banner_image.jpg)
-# Spotify Tracks Recommendation Engine!
+<p align="center">
+  <img src="Images/banner_image.jpg" alt="Spotify Banner" width="800"/>
+</p>
+
+<h1 align="center">Spotify Tracks Recommendation Engine!</h1>
 
 ## Project Bookmarks:
 
