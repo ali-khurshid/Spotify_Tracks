@@ -9,18 +9,15 @@ from scipy.stats import spearmanr
 from utils.data_processing import load_data
 from utils.visualisation import plot_scatter
 
-st.subheader("💿 Spotify Tracks")
+
 
 st.subheader("🎵 Hypothesis 3: Acousticness vs. Energy and Popularity")
 
-col1, col2 = st.columns([1, 2])
-
-with col1:
-    st.latex(r"""
-\begin{aligned}
-H_{0} &= \text{There is no statistically significant relationship between acousticness and either energy or popularity.} \\
-H_{1} &= \text{Tracks with high acousticness have lower energy and lower popularity.}
-\end{aligned}
+st.markdown("""
+$H_{0}$ : There is no statistically significant relationship between acousticness and either energy or popularity.
+            """)
+st.markdown("""
+$H_{1}$ : Tracks with high acousticness have lower energy and lower popularity.
 
              """)
     

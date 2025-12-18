@@ -50,8 +50,8 @@ with col[2]:
         st.markdown(f"### :material/radar:\
                         Radar Plot for Cluster {selected_cluster}")
         st.plotly_chart(make_cluster_radar(df,
-                                        selected_cluster,
-                                        NUMERIC_FEATURES),
+                                           selected_cluster,
+                                           NUMERIC_FEATURES),
                         use_container_width=True)
 
     with tab[1]:
@@ -62,7 +62,6 @@ with col[2]:
         st.header(":material/scatter_plot: PCA Cluster Visualisation")
         st.plotly_chart(pca_cluster_scatter(df_pca),
                         use_container_width=True)
-    
 
 with col[3]:
     st.markdown("### Top 5 Songs")
@@ -78,5 +77,3 @@ with col[3]:
                          "popularity"]].reset_index(drop=True),
                  hide_index=True,
                  use_container_width=True)
-
-

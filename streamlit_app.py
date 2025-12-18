@@ -6,40 +6,43 @@ st.set_page_config(
     layout="wide",
 )
 
+st.title("💿 Spotify Tracks")
+st.subheader("An interactive application for exploring and analyzing\
+              Spotify track data.")
 
 # ---------- Define pages ----------
 home = st.Page(
-    "pages/01_home.py",
+    "pages/home.py",
     title="Home",
     icon=":material/house:"
 )
 
 eda = st.Page(
-    "pages/02_eda.py",
+    "pages/eda.py",
     title="Exploratory Data Analysis",
     icon=":material/analytics:"
 )
 
 hypothesis1 = st.Page(
-    "pages/03_hypothesis1.py",
+    "pages/hypothesis1.py",
     title="Hypothesis 1",
     icon=":material/biotech:"
 )
 
 hypothesis2 = st.Page(
-    "pages/04_hypothesis2.py",
+    "pages/hypothesis2.py",
     title="Hypothesis 2",
     icon=":material/biotech:"
 )
 
 hypothesis3 = st.Page(
-    "pages/05_hypothesis3.py",
+    "pages/hypothesis3.py",
     title="Hypothesis 3",
     icon=":material/biotech:"
 )
 
 clustering = st.Page(
-    "pages/06_clustering.py",
+    "pages/clustering.py",
     title="Clustering",
     icon=":material/bubble_chart:"
 )
