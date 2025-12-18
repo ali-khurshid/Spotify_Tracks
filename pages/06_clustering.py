@@ -64,16 +64,16 @@ with tab[0]:
     st.markdown(f"### :material/radar:\
                     Radar Plot for Cluster {selected_cluster}")
     st.plotly_chart(make_cluster_radar(df,
-                                           selected_cluster,
-                                           NUMERIC_FEATURES),
-                        use_container_width=True)
+                                       selected_cluster,
+                                       NUMERIC_FEATURES),
+                    use_container_width=True)
 
 with tab[1]:
     st.header(":material/insights: Silhouette Plot (Cluster Quality)")
     st.plotly_chart(silhouette_plot(df_sil, selected_cluster),
-                        use_container_width=True)
+                    use_container_width=True)
 with tab[2]:
     st.header(":material/scatter_plot: PCA Cluster Visualisation")
     st.plotly_chart(pca_cluster_scatter(df_pca),
-                        use_container_width=True)
+                    use_container_width=True)
     
